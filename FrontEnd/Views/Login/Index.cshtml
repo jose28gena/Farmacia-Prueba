@@ -1,0 +1,81 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@ 
+@{
+}
+<style>
+    #loginForm .btn-primary {
+        background-color: #004085; /* Personaliza el color del botón si es necesario */
+    }
+
+    /* Personaliza el foco en los inputs */
+    #loginForm input[type="text"]:focus,
+    #loginForm input[type="password"]:focus {
+        border-color: #66afe9;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+    }
+
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  
+    $(document).ready(function() {
+        // Login form submit event
+        $('#loginForm').submit(function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form data
+            var username = $('#username').val();
+            var password = $('#password').val();
+
+            // Perform login request
+            $.ajax({
+                url: API_URLS.login,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ Usuario: username, Password: password }),
+                success: function(response) {
+                    // Store token in local storage
+                    localStorage.setItem('token', response.token);
+
+                    // Redirect to home page
+                    window.location.href = '/Usuarios/Index';
+                },
+                error: function(response) {
+                    alert('Invalid username or password');
+                }
+            });
+          
+        });
+    });
+</script>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg p-4 mb-5 bg-white rounded">
+                <h2 class="text-center mb-4 font-weight-bold">Login</h2>
+                <form id="loginForm" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <label for="username" class="font-weight-bold">Username:</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Please enter your username.
+                        </div>
+                    </div>
+                    <div class="form-group mb-5">
+                        <label for="password" class="font-weight-bold">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Please enter your password.
+                        </div>
+                    </div>
+                    <div class="form-group text-end">
+                        <button type="submit" class="btn btn-primary btn-small btn-block">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
