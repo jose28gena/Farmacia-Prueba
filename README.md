@@ -32,4 +32,4 @@ Este repositorio contiene dos proyectos desarrollados con ASP.NET: un proyecto W
 
 1. Clonar el repositorio usando:
    ```bash
-   git clone URL_DEL_REPOSITORIO
+   git clone https://github.com/jose28gena/Farmacia-Prueba
