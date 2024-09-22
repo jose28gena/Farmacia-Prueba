@@ -1,4 +1,4 @@
-# Prueba Técnica - CEPDI
+# Prueba Técnica 
 
 ## Descripción
 
